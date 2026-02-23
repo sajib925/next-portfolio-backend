@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+  id                 Int       @id @default(autoincrement())
+
+  // 🔐 Authentication
+  email              String    @unique
+  password           String
+
+  // 👤 Profile Info (Optional)
+  name               String?
+  username           String?   @unique
+  bio                String?
+  picture            String?
+  coverPhoto         String?
+
+  // 📞 Contact Info
+  mobile             String?
+  alternateEmail     String?
+  location           String?
+
+  // 🌐 Social Links
+  website            String?
+  github             String?
+  linkedin           String?
+  twitter            String?
+  facebook           String?
+  instagram          String?
+
+  // 💼 Professional Info
+  designation        String?
+  company            String?
+  experience         String?
+  skills             String[]
+  resumeUrl          String?
+
+  // ⚙️ Account Settings
+  isActive           Boolean   @default(true)
+  isVerified         Boolean   @default(true)
+
+  // 🔐 Security Tracking
+  lastLogin          DateTime?
+  passwordChangedAt  DateTime?
+  loginAttempts      Int       @default(0)
+
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model Blog {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  content     String
+  thumbnail   String?
+  excerpt     String?
+  published   Boolean   @default(true)
+
+  views       Int       @default(0)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Project {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  description String
+  thumbnail   String?
+  frontendLiveLink    String?
+  backendLiveLink String?
+  frontendGithubLink  String?
+  backendGithubLink String?
+  technologies String[]
+  featured    Boolean   @default(false)
+
+  views       Int       @default(0)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Contact {
+  id          Int       @id @default(autoincrement())
+  name        String
+  email       String
+  subject     String?
+  message     String
+  replied     Boolean   @default(false)
+  reply       String?
+
+  createdAt   DateTime  @default(now())
+}
+
+model Visitor {
+  id          Int       @id @default(autoincrement())
+
+  ip          String
+  userAgent   String
+  page        String
+  referrer    String?
+
+  country     String?
+  city        String?
+
+  device      String?
+  browser     String?
+
+  createdAt   DateTime  @default(now())
+
+  @@index([page])
+  @@index([createdAt])
+}
+
+
