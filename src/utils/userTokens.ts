@@ -6,13 +6,28 @@ interface UserTokenPayload {
 }
 
 export const createUserTokens = (user: UserTokenPayload) => {
+  const { JWT_ACCESS_SECRET, JWT_ACCESS_EXPIRES, JWT_REFRESH_SECRET, JWT_REFRESH_EXPIRES, } = process.env
+
+  if ( !JWT_ACCESS_SECRET || !JWT_ACCESS_EXPIRES || !JWT_REFRESH_SECRET || !JWT_REFRESH_EXPIRES) {
+    throw new Error("JWT environment variables are missing")
+  }
+
   const jwtPayload = {
     userId: user.userId,
     email: user.email,
   }
 
-  const accessToken = generateToken(jwtPayload, process.env.JWT_ACCESS_SECRET as string, process.env.JWT_ACCESS_EXPIRES as string)
-  const refreshToken = generateToken(jwtPayload, process.env.JWT_REFRESH_SECRET as string, process.env.JWT_REFRESH_EXPIRES as string)
+  const accessToken = generateToken(
+    jwtPayload,
+    JWT_ACCESS_SECRET,
+    JWT_ACCESS_EXPIRES
+  )
+
+  const refreshToken = generateToken(
+    jwtPayload,
+    JWT_REFRESH_SECRET,
+    JWT_REFRESH_EXPIRES
+  )
 
   return {
     accessToken,

@@ -2,20 +2,36 @@ import type { Request, Response, NextFunction } from "express"
 import httpStatus from "http-status-codes"
 import AppError from "../errorHelper/appError.js"
 import { verifyToken } from "../utils/jwt.js"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
 
 export const checkAuth = () => {
-  return (req: Request, _res: Response, next: NextFunction) => {
+  return async (req: Request, _res: Response, next: NextFunction) => {
     try {
-      const token =
-        req.cookies.accessToken || req.headers.authorization?.split(" ")[1]
+      const token = req.cookies.accessToken || req.headers.authorization?.split(" ")[1]
 
       if (!token) {
         throw new AppError(httpStatus.UNAUTHORIZED, "No access token provided")
       }
 
-      const decoded = verifyToken(token, process.env.JWT_ACCESS_SECRET as string)
+      // Verify JWT
+      const decoded = verifyToken(token, process.env.JWT_ACCESS_SECRET as string) as {
+        userId: number
+        email: string
+      }
 
-      req.user = decoded as { userId: number; email: string }
+      // Check if user exists in Prisma DB
+      const user = await prisma.user.findUnique({ where: { id: decoded.userId } })
+      if (!user) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "User not found")
+      }
+
+      // Attach user info to request
+      req.user = {
+        userId: user.id,
+        email: user.email,
+      }
 
       next()
     } catch (err) {

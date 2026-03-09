@@ -15,7 +15,7 @@ async function startServer() {
 
     server = http.createServer(app);
     server.listen(PORT, () => {
-      console.log(`🚀 CodeToFlow Server is running on port http://localhost:${PORT}`);
+      console.log(`🚀 CodeToFlow Server is running on port http://localhost:${PORT}/api/v1`);
     });
 
     handleProcessEvents();
