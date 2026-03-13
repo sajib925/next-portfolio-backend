@@ -12,14 +12,12 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://next-portfolio-backend-navy.vercel.app"
+      "https://next-portfolio-frontend.vercel.app", // your frontend domain
     ],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
-
-app.options("*", cors()); 
 
 app.use(cookieParser());
 app.use(compression());
