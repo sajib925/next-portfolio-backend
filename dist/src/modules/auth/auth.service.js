@@ -67,17 +67,27 @@ const changePassword = async (oldPassword, newPassword, decodedToken) => {
         },
     });
 };
+// const getProfile = async (userId: number) => {
+//   const user = await prisma.user.findUnique({
+//     where: { id: userId },
+//     select: {
+//       password: false,
+//     },
+//   })
+//   if (!user) {
+//     throw new AppError(httpStatus.NOT_FOUND, "User not found")
+//   }
+//   return user
+// }
 const getProfile = async (userId) => {
     const user = await prisma.user.findUnique({
         where: { id: userId },
-        select: {
-            password: false,
-        },
     });
     if (!user) {
         throw new AppError(httpStatus.NOT_FOUND, "User not found");
     }
-    return user;
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
 };
 const updateProfile = async (userId, payload) => {
     const user = await prisma.user.findUnique({
