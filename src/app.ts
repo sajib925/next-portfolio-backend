@@ -10,7 +10,7 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandle.js";
 const app: Express = express();
 
 // ✅ Allowed origin (frontend)
-const FRONTEND_URL = "http://localhost:3000";
+const FRONTEND_URL = "https://next-portfolio-frontend-ivory.vercel.app";
 
 // ✅ CORS (STRICT + SAFE)
 app.use(
