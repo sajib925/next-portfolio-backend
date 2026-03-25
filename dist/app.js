@@ -7,7 +7,7 @@ import notFound from "./middlewares/notFound.js";
 import { globalErrorHandler } from "./middlewares/globalErrorHandle.js";
 const app = express();
 // ✅ Allowed origin (frontend)
-const FRONTEND_URL = "https://next-portfolio-frontend-ivory.vercel.app";
+const FRONTEND_URL = "http://localhost:3000";
 // ✅ CORS (STRICT + SAFE)
 app.use(cors({
     origin: FRONTEND_URL,
