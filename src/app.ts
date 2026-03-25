@@ -8,35 +8,12 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandle.js";
 
 const app: Express = express();
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://next-portfolio-frontend-ivory.vercel.app",
-];
-
-const corsOptions: cors.CorsOptions = {
-  origin: (origin, callback) => {
-    if (!origin) {
-      return callback(null, true);
-    }
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    return callback(new Error("Not allowed by CORS"));
-  },
+cors({
+  origin: "https://next-portfolio-frontend-ivory.vercel.app",
   credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "Accept",
-    "Origin",
-  ],
-  optionsSuccessStatus: 204,
-};
+})
 
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+
 
 app.use(cookieParser());
 app.use(compression());
