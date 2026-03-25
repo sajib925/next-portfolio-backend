@@ -1,0 +1,1 @@
+{"version":3,"file":"prismaNotFoundError.d.ts","sourceRoot":"","sources":["../../src/helpers/prismaNotFoundError.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,MAAM,EAAE,MAAM,gBAAgB,CAAC;AAC7C,OAAO,KAAK,EAAE,qBAAqB,EAAE,MAAM,6BAA6B,CAAC;AAGzE,eAAO,MAAM,yBAAyB,GACpC,KAAK,MAAM,CAAC,6BAA6B,KACxC,qBAKF,CAAC"}

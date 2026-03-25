@@ -1,0 +1,1 @@
+{"version":3,"file":"setCookie.d.ts","sourceRoot":"","sources":["../../src/utils/setCookie.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAA;AAEvC,MAAM,WAAW,UAAU;IACzB,WAAW,CAAC,EAAE,MAAM,CAAA;IACpB,YAAY,CAAC,EAAE,MAAM,CAAA;CACtB;AAED,eAAO,MAAM,aAAa,GAAI,KAAK,QAAQ,EAAE,WAAW,UAAU,SAiBjE,CAAA"}
