@@ -1,4 +1,5 @@
 import express, { type Express } from "express";
+import type { Request, Response, NextFunction } from "express";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -8,20 +9,63 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandle.js";
 
 const app: Express = express();
 
+// ✅ Allowed origin (frontend)
+const FRONTEND_URL = "https://next-portfolio-frontend-ivory.vercel.app";
+
+// ✅ CORS (STRICT + SAFE)
 app.use(
   cors({
-    origin: "https://next-portfolio-frontend-ivory.vercel.app",
+    origin: FRONTEND_URL,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   })
 );
+
+// ✅ 🔥 IMPORTANT: Force headers (fix Vercel override issue)
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.header("Access-Control-Allow-Origin", FRONTEND_URL);
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+  );
+
+  // ✅ Handle preflight request
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
+
+// ✅ Middlewares
 app.use(cookieParser());
 app.use(compression());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// ✅ Trust proxy (Vercel)
+app.set("trust proxy", 1);
+
+// ✅ Health check
+app.get("/", (_req: Request, res: Response) => {
+  res.status(200).json({
+    success: true,
+    message: "API is running 🚀",
+  });
+});
+
+// ✅ Routes
 app.use("/api/v1", apiRoutes);
 
+// ❌ Not found
 app.use(notFound);
 
+// ❌ Global error handler
 app.use(globalErrorHandler);
 
 export default app;
