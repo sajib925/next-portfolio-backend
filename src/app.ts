@@ -8,13 +8,12 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandle.js";
 
 const app: Express = express();
 
-cors({
-  origin: "https://next-portfolio-frontend-ivory.vercel.app",
-  credentials: true,
-})
-
-
-
+app.use(
+  cors({
+    origin: "https://next-portfolio-frontend-ivory.vercel.app",
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use(compression());
 app.use(express.json());

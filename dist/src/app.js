@@ -6,10 +6,10 @@ import apiRoutes from "./routes/index.js";
 import notFound from "./middlewares/notFound.js";
 import { globalErrorHandler } from "./middlewares/globalErrorHandle.js";
 const app = express();
-cors({
+app.use(cors({
     origin: "https://next-portfolio-frontend-ivory.vercel.app",
     credentials: true,
-});
+}));
 app.use(cookieParser());
 app.use(compression());
 app.use(express.json());
