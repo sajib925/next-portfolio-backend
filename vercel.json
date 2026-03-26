@@ -1,15 +1,38 @@
 {
-    "version": 2,
-    "builds": [
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
         {
-            "src": "dist/server.js",
-            "use": "@vercel/node"
-        }
-    ],
-    "routes": [
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://next-portfolio-frontend-ivory.vercel.app"
+        },
         {
-            "src": "/(.*)",
-            "dest": "dist/server.js"
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
         }
-    ]
-} 
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/server.js"
+    }
+  ]
+}
