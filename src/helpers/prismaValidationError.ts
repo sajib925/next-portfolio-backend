@@ -1,8 +1,8 @@
-import type { Prisma } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import type { TGenericErrorResponse } from "../interfaces/error.type.js";
 
 export const handlePrismaValidationError = (
-  err: Prisma.PrismaClientValidationError
+  err: PrismaClientKnownRequestError
 ): TGenericErrorResponse => {
   return {
     statusCode: 400,

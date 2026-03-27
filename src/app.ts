@@ -11,9 +11,7 @@ const app: Express = express();
 
 app.use(cors({
   origin: "https://next-portfolio-frontend-ivory.vercel.app",
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
+  credentials: true
 }));
 
 app.use(cookieParser());

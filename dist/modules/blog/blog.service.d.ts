@@ -6,42 +6,9 @@ export declare const BlogServices: {
         thumbnail?: string;
         excerpt?: string;
         published?: boolean;
-    }) => Promise<{
-        id: number;
-        content: string;
-        title: string;
-        createdAt: Date;
-        updatedAt: Date;
-        slug: string;
-        thumbnail: string | null;
-        excerpt: string | null;
-        published: boolean;
-        views: number;
-    }>;
-    getAllBlogs: () => Promise<{
-        id: number;
-        content: string;
-        title: string;
-        createdAt: Date;
-        updatedAt: Date;
-        slug: string;
-        thumbnail: string | null;
-        excerpt: string | null;
-        published: boolean;
-        views: number;
-    }[]>;
-    getBlogById: (id: number) => Promise<{
-        id: number;
-        content: string;
-        title: string;
-        createdAt: Date;
-        updatedAt: Date;
-        slug: string;
-        thumbnail: string | null;
-        excerpt: string | null;
-        published: boolean;
-        views: number;
-    }>;
+    }) => Promise<any>;
+    getAllBlogs: () => Promise<any>;
+    getBlogById: (id: number) => Promise<any>;
     updateBlog: (id: number, payload: Partial<{
         title: string;
         slug: string;
@@ -49,18 +16,7 @@ export declare const BlogServices: {
         thumbnail: string;
         excerpt: string;
         published: boolean;
-    }>) => Promise<{
-        id: number;
-        content: string;
-        title: string;
-        createdAt: Date;
-        updatedAt: Date;
-        slug: string;
-        thumbnail: string | null;
-        excerpt: string | null;
-        published: boolean;
-        views: number;
-    }>;
+    }>) => Promise<any>;
     deleteBlog: (id: number) => Promise<void>;
 };
 //# sourceMappingURL=blog.service.d.ts.map

@@ -1,5 +1,5 @@
 import {} from "express";
-import { Prisma } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import AppError from "../errorHelper/appError.js";
 import { handlePrismaDuplicateError } from "../helpers/prismaClientError.js";
 import { handlePrismaNotFoundError } from "../helpers/prismaNotFoundError.js";
@@ -12,7 +12,7 @@ export const globalErrorHandler = async (err, _req, res, _next) => {
     if (process.env.NODE_ENV === "development") {
         console.error("💥 Global Error:", err);
     }
-    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+    if (err instanceof PrismaClientKnownRequestError && (err.code === "P2002" || err.code === "P2025" || err.code === "P2023")) {
         if (err.code === "P2002") {
             const simplified = handlePrismaDuplicateError(err);
             statusCode = simplified.statusCode;
@@ -24,7 +24,7 @@ export const globalErrorHandler = async (err, _req, res, _next) => {
             message = simplified.message;
         }
     }
-    else if (err instanceof Prisma.PrismaClientValidationError) {
+    else if (err instanceof PrismaClientKnownRequestError && err.code === "P2000") {
         const simplified = handlePrismaValidationError(err);
         statusCode = simplified.statusCode;
         message = simplified.message;
