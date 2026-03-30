@@ -8,6 +8,7 @@ import notFound from "./middlewares/notFound.js";
 import { globalErrorHandler } from "./middlewares/globalErrorHandle.js";
 
 const app: Express = express();
+app.options("*", cors());
 
 app.use(cors({
   origin: "https://next-portfolio-frontend-ivory.vercel.app",
