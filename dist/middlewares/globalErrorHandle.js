@@ -42,6 +42,10 @@ export const globalErrorHandler = async (err, _req, res, _next) => {
     else if (err instanceof Error) {
         message = err.message;
     }
+    // ✅ Ensure CORS headers are preserved in error responses
+    const FRONTEND_URL = process.env.FRONTEND_URL || "https://next-portfolio-frontend-ivory.vercel.app";
+    res.header("Access-Control-Allow-Origin", FRONTEND_URL);
+    res.header("Access-Control-Allow-Credentials", "true");
     res.status(statusCode).json({
         success: false,
         message,
