@@ -9,8 +9,19 @@ export declare const VisitorServices: {
         device?: string;
         browser?: string;
     }) => Promise<{
-        count: any;
+        count: number;
     }>;
-    getAllVisitors: () => Promise<any>;
+    getAllVisitors: () => Promise<{
+        id: number;
+        referrer: string | null;
+        page: string;
+        country: string | null;
+        browser: string | null;
+        ip: string;
+        createdAt: Date;
+        userAgent: string;
+        city: string | null;
+        device: string | null;
+    }[]>;
 };
 //# sourceMappingURL=visitor.service.d.ts.map

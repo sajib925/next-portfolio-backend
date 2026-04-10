@@ -10,9 +10,54 @@ export declare const ProjectServices: {
         backendGithubLink?: string;
         technologies: string[];
         featured?: boolean;
-    }) => Promise<any>;
-    getAllProjects: () => Promise<any>;
-    getProjectById: (id: number) => Promise<any>;
+    }) => Promise<{
+        id: number;
+        title: string;
+        description: string;
+        createdAt: Date;
+        updatedAt: Date;
+        slug: string;
+        thumbnail: string | null;
+        views: number;
+        frontendLiveLink: string | null;
+        backendLiveLink: string | null;
+        frontendGithubLink: string | null;
+        backendGithubLink: string | null;
+        technologies: string[];
+        featured: boolean;
+    }>;
+    getAllProjects: () => Promise<{
+        id: number;
+        title: string;
+        description: string;
+        createdAt: Date;
+        updatedAt: Date;
+        slug: string;
+        thumbnail: string | null;
+        views: number;
+        frontendLiveLink: string | null;
+        backendLiveLink: string | null;
+        frontendGithubLink: string | null;
+        backendGithubLink: string | null;
+        technologies: string[];
+        featured: boolean;
+    }[]>;
+    getProjectById: (id: number) => Promise<{
+        id: number;
+        title: string;
+        description: string;
+        createdAt: Date;
+        updatedAt: Date;
+        slug: string;
+        thumbnail: string | null;
+        views: number;
+        frontendLiveLink: string | null;
+        backendLiveLink: string | null;
+        frontendGithubLink: string | null;
+        backendGithubLink: string | null;
+        technologies: string[];
+        featured: boolean;
+    }>;
     updateProject: (id: number, payload: Partial<{
         title: string;
         slug: string;
@@ -24,7 +69,37 @@ export declare const ProjectServices: {
         backendGithubLink: string;
         technologies: string[];
         featured: boolean;
-    }>) => Promise<any>;
-    deleteProject: (id: number) => Promise<any>;
+    }>) => Promise<{
+        id: number;
+        title: string;
+        description: string;
+        createdAt: Date;
+        updatedAt: Date;
+        slug: string;
+        thumbnail: string | null;
+        views: number;
+        frontendLiveLink: string | null;
+        backendLiveLink: string | null;
+        frontendGithubLink: string | null;
+        backendGithubLink: string | null;
+        technologies: string[];
+        featured: boolean;
+    }>;
+    deleteProject: (id: number) => Promise<{
+        id: number;
+        title: string;
+        description: string;
+        createdAt: Date;
+        updatedAt: Date;
+        slug: string;
+        thumbnail: string | null;
+        views: number;
+        frontendLiveLink: string | null;
+        backendLiveLink: string | null;
+        frontendGithubLink: string | null;
+        backendGithubLink: string | null;
+        technologies: string[];
+        featured: boolean;
+    }>;
 };
 //# sourceMappingURL=project.service.d.ts.map

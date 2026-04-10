@@ -4,14 +4,68 @@ export declare const ContactServices: {
         email: string;
         subject?: string;
         message: string;
-    }) => Promise<any>;
-    getAllContacts: () => Promise<any>;
-    getContactById: (id: number) => Promise<any>;
+    }) => Promise<{
+        name: string;
+        message: string;
+        id: number;
+        email: string;
+        subject: string | null;
+        createdAt: Date;
+        replied: boolean;
+        reply: string | null;
+    }>;
+    getAllContacts: () => Promise<{
+        name: string;
+        message: string;
+        id: number;
+        email: string;
+        subject: string | null;
+        createdAt: Date;
+        replied: boolean;
+        reply: string | null;
+    }[]>;
+    getContactById: (id: number) => Promise<{
+        name: string;
+        message: string;
+        id: number;
+        email: string;
+        subject: string | null;
+        createdAt: Date;
+        replied: boolean;
+        reply: string | null;
+    }>;
     updateContact: (id: number, payload: Partial<{
         replied: boolean;
         reply?: string;
-    }>) => Promise<any>;
-    deleteContact: (id: number) => Promise<any>;
-    replyToContact: (id: number, replyMessage: string) => Promise<any>;
+    }>) => Promise<{
+        name: string;
+        message: string;
+        id: number;
+        email: string;
+        subject: string | null;
+        createdAt: Date;
+        replied: boolean;
+        reply: string | null;
+    }>;
+    deleteContact: (id: number) => Promise<{
+        name: string;
+        message: string;
+        id: number;
+        email: string;
+        subject: string | null;
+        createdAt: Date;
+        replied: boolean;
+        reply: string | null;
+    }>;
+    replyToContact: (id: number, replyMessage: string) => Promise<{
+        name: string;
+        message: string;
+        id: number;
+        email: string;
+        subject: string | null;
+        createdAt: Date;
+        replied: boolean;
+        reply: string | null;
+    }>;
 };
 //# sourceMappingURL=contact.service.d.ts.map
