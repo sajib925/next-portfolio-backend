@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export const checkAuth = () => {
     return async (req, _res, next) => {
         try {
-            const token = req.cookies.accessToken || req.headers.authorization?.split(" ")[1];
+            const token = req.headers.authorization?.split(" ")[1];
             if (!token) {
                 throw new AppError(httpStatus.UNAUTHORIZED, "No access token provided");
             }

@@ -3,35 +3,27 @@ import httpStatus from "http-status-codes";
 import {} from "jsonwebtoken";
 import { catchAsync } from "../../utils/catchAsync.js";
 import { AuthServices } from "./auth.service.js";
-import { setAuthCookie } from "../../utils/setCookie.js";
 import { sendResponse } from "../../utils/sendResponse.js";
 const login = catchAsync(async (req, res) => {
     const result = await AuthServices.login(req.body);
-    setAuthCookie(res, {
-        accessToken: result.accessToken,
-        refreshToken: result.refreshToken,
-    });
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,
         message: "Logged in successfully",
-        data: result,
+        data: { token: result.accessToken, refreshToken: result.refreshToken },
     });
 });
 const refreshToken = catchAsync(async (req, res) => {
-    const refreshToken = req.cookies.refreshToken;
-    const result = await AuthServices.getNewAccessToken(refreshToken);
-    setAuthCookie(res, result);
+    const { refreshToken: token } = req.body;
+    const result = await AuthServices.getNewAccessToken(token);
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,
         message: "New access token generated",
-        data: result,
+        data: { token: result.accessToken },
     });
 });
 const logout = catchAsync(async (_req, res) => {
-    res.clearCookie("accessToken");
-    res.clearCookie("refreshToken");
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,
