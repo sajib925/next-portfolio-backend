@@ -10,7 +10,7 @@ const app: Express = express();
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: "http://localhost:3000",
     credentials: true,
   }),
 )
@@ -23,7 +23,7 @@ app.set("trust proxy", 1)
 app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
     success: true,
-    message: "Welcome to Parcel Delivery API",
+    message: "Welcome to portfolio API",
     version: "1.0.0",
   })
 })
