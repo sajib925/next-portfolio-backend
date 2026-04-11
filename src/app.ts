@@ -1,5 +1,4 @@
-import express, { type Express, type Request, type Response, type NextFunction } from "express";
-import cookieParser from "cookie-parser";
+import express, { type Express, type Request, type Response } from "express";
 import cors from "cors";
 import apiRoutes from "./routes/index.js";
 import notFound from "./middlewares/notFound.js";
@@ -7,33 +6,17 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandle.js";
 
 const app: Express = express();
 
-
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://next-portfolio-frontend-ivory.vercel.app",
-];
-
+// ✅ Allow all origins (DEV / OPEN MODE)
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow tools like Postman (no origin)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("Not allowed by CORS"));
-    },
+    origin: true,
     credentials: true,
   })
 );
 
-
-app.use(cookieParser())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.set("trust proxy", 1)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.set("trust proxy", 1);
 
 // Health check
 app.get("/", (_req: Request, res: Response) => {
@@ -41,12 +24,11 @@ app.get("/", (_req: Request, res: Response) => {
     success: true,
     message: "Welcome to portfolio API",
     version: "1.0.0",
-  })
-})
+  });
+});
 
 app.use("/api/v1", apiRoutes);
 app.use(notFound);
 app.use(globalErrorHandler);
 
 export default app;
-
