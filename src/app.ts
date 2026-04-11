@@ -8,12 +8,28 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandle.js";
 const app: Express = express();
 
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://next-portfolio-frontend-ivory.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: function (origin, callback) {
+      // allow tools like Postman (no origin)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
-  }),
-)
+  })
+);
+
+
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
