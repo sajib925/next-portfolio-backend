@@ -5,6 +5,7 @@ import { contactRoutes } from "../modules/contact/contact.route.js";
 import { blogRoutes } from "../modules/blog/blog.route.js";
 import { visitorRoutes } from "../modules/vistior/visitor.route.js";
 import { reviewRoutes } from "../modules/review/review.route.js";
+import { chatRoutes } from "../modules/chat/chat.route.js";
 export const apiRoutes = Router();
 const moduleRoutes = [
     {
@@ -26,6 +27,10 @@ const moduleRoutes = [
     {
         path: "/review",
         route: reviewRoutes
+    },
+    {
+        path: "/chat",
+        route: chatRoutes
     },
     {
         path: "/visitors",
