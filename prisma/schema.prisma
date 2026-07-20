@@ -100,6 +100,28 @@ model Review {
   createdAt   DateTime  @default(now())
 }
 
+
+model ChatSession {
+  id        String        @id @default(uuid())
+  createdAt DateTime      @default(now())
+  messages  ChatMessage[]
+}
+
+model ChatMessage {
+  id        Int         @id @default(autoincrement())
+  role      String      
+  content   String      @db.Text
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  createdAt DateTime    @default(now())
+}
+
+model BotConfig {
+  id           String   @id @default("current_config")
+  systemPrompt String   @db.Text
+  updatedAt    DateTime @updatedAt
+}
+
 model Contact {
   id          Int       @id @default(autoincrement())
   name        String
