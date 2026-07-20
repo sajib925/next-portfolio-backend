@@ -90,6 +90,16 @@ model Project {
   updatedAt   DateTime  @updatedAt
 }
 
+model Review {
+  id          Int       @id @default(autoincrement())
+  clientAvatar   String?
+  clientName        String?
+  clientDesignation       String
+  clientMessage     String
+
+  createdAt   DateTime  @default(now())
+}
+
 model Contact {
   id          Int       @id @default(autoincrement())
   name        String

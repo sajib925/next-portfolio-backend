@@ -4,6 +4,7 @@ import { projectRoutes } from "../modules/projects/project.route.js"
 import { contactRoutes } from "../modules/contact/contact.route.js"
 import { blogRoutes } from "../modules/blog/blog.route.js"
 import { visitorRoutes } from "../modules/vistior/visitor.route.js"
+import { reviewRoutes } from "../modules/review/review.route.js"
 
 export const apiRoutes: Router = Router()
 
@@ -23,6 +24,10 @@ const moduleRoutes = [
   {
     path: "/projects",
     route: projectRoutes,
+  },
+  {
+    path: "/review",
+    route: reviewRoutes
   },
   {
     path: "/visitors",
