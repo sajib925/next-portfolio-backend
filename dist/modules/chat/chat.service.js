@@ -8,7 +8,9 @@ const openrouter = new OpenAI({
 const getChatResponseFromAI = async (message, sessionId) => {
     let currentSessionId = sessionId;
     if (!currentSessionId) {
-        const newSession = await prisma.chatSession.create({});
+        const newSession = await prisma.chatSession.create({
+            data: {},
+        });
         currentSessionId = newSession.id;
     }
     await prisma.chatMessage.create({
@@ -47,10 +49,11 @@ const getChatResponseFromAI = async (message, sessionId) => {
     };
     const messages = [systemPrompt, ...formattedHistory];
     const response = await openrouter.chat.completions.create({
-        model: "google/gemma-4-31b-it:free",
+        model: "google/gemma-4-26b-a4b-it:free",
         messages: messages,
     });
-    const aiReply = response.choices?.[0]?.message?.content?.trim() || "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.";
+    const aiReply = response.choices?.[0]?.message?.content?.trim() ||
+        "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.";
     await prisma.chatMessage.create({
         data: {
             role: "assistant",
