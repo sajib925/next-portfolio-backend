@@ -96,7 +96,7 @@ model Review {
   clientName        String?
   clientDesignation       String
   clientMessage     String
-
+  rating Int
   createdAt   DateTime  @default(now())
 }
 

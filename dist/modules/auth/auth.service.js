@@ -67,18 +67,6 @@ const changePassword = async (oldPassword, newPassword, decodedToken) => {
         },
     });
 };
-// const getProfile = async (userId: number) => {
-//   const user = await prisma.user.findUnique({
-//     where: { id: userId },
-//     select: {
-//       password: false,
-//     },
-//   })
-//   if (!user) {
-//     throw new AppError(httpStatus.NOT_FOUND, "User not found")
-//   }
-//   return user
-// }
 const getProfile = async (userId) => {
     const user = await prisma.user.findUnique({
         where: { id: userId },
@@ -99,8 +87,8 @@ const updateProfile = async (userId, payload) => {
     const updatedUser = await prisma.user.update({
         where: { id: userId },
         data: payload,
-        select: {
-            password: false,
+        omit: {
+            password: true,
         },
     });
     return updatedUser;

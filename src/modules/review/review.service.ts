@@ -7,7 +7,16 @@ const createReview = async (payload: {
   clientName: string
   clientDesignation: string
   clientMessage: string
+  rating: number
 }) => prisma.review.create({ data: payload })
+
+const updateReview = async (id: number, payload: Partial<{
+  clientAvatar: string
+  clientName: string
+  clientDesignation: string
+  clientMessage: string
+  rating: number
+}>) => prisma.review.update({ where: { id }, data: payload })
 
 const getAllReview = async () => prisma.review.findMany({ orderBy: { createdAt: "desc" } })
 
@@ -18,4 +27,5 @@ export const ReviewServices = {
   createReview,
   getAllReview,
   deleteReview,
+  updateReview
 }

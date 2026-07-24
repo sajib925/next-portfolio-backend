@@ -6,6 +6,7 @@ const router = Router();
 router.get("/", ReviewControllers.getAllReviews);
 // Protected routes
 router.post("/create", checkAuth(), ReviewControllers.createReview);
+router.patch("/:id", checkAuth(), ReviewControllers.updateReview);
 router.delete("/:id", checkAuth(), ReviewControllers.deleteReview);
 export const reviewRoutes = router;
 export default router;

@@ -5,6 +5,7 @@ import { createUserTokens } from "../../utils/userTokens.js";
 import { verifyToken } from "../../utils/jwt.js";
 import { PrismaClient } from "@prisma/client";
 import type { JwtPayload } from "jsonwebtoken";
+import type { IUpdateProfilePayload } from "../../types/index.js";
 
 const prisma = new PrismaClient();
 
@@ -107,20 +108,6 @@ const changePassword = async (
   })
 }
 
-// const getProfile = async (userId: number) => {
-//   const user = await prisma.user.findUnique({
-//     where: { id: userId },
-//     select: {
-//       password: false,
-//     },
-//   })
-
-//   if (!user) {
-//     throw new AppError(httpStatus.NOT_FOUND, "User not found")
-//   }
-
-//   return user
-// }
 const getProfile = async (userId: number) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -137,12 +124,7 @@ const getProfile = async (userId: number) => {
 
 const updateProfile = async (
   userId: number,
-  payload: {
-    name?: string
-    mobile?: string
-    bio?: string
-    picture?: string
-  },
+  payload: IUpdateProfilePayload,
 ) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -155,8 +137,8 @@ const updateProfile = async (
   const updatedUser = await prisma.user.update({
     where: { id: userId },
     data: payload,
-    select: {
-      password: false,
+    omit: {
+      password: true, 
     },
   })
 

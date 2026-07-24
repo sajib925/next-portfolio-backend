@@ -1,4 +1,5 @@
 import type { JwtPayload } from "jsonwebtoken";
+import type { IUpdateProfilePayload } from "../../types/index.js";
 export declare const AuthServices: {
     login: (payload: {
         email: string;
@@ -71,11 +72,35 @@ export declare const AuthServices: {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    updateProfile: (userId: number, payload: {
-        name?: string;
-        mobile?: string;
-        bio?: string;
-        picture?: string;
-    }) => Promise<{}>;
+    updateProfile: (userId: number, payload: IUpdateProfilePayload) => Promise<{
+        name: string | null;
+        location: string | null;
+        id: number;
+        picture: string | null;
+        username: string | null;
+        mobile: string | null;
+        email: string;
+        bio: string | null;
+        coverPhoto: string | null;
+        alternateEmail: string | null;
+        website: string | null;
+        github: string | null;
+        linkedin: string | null;
+        twitter: string | null;
+        facebook: string | null;
+        instagram: string | null;
+        designation: string | null;
+        company: string | null;
+        experience: string | null;
+        skills: string[];
+        resumeUrl: string | null;
+        isActive: boolean;
+        isVerified: boolean;
+        lastLogin: Date | null;
+        passwordChangedAt: Date | null;
+        loginAttempts: number;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
 };
 //# sourceMappingURL=auth.service.d.ts.map
